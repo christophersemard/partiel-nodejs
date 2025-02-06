@@ -49,7 +49,7 @@ export class LoginComponent {
         this.authService.login(email, password).subscribe({
             next: () => {
                 console.log("Connexion réussie");
-                const userRole = this.authProvider.getUserRole();
+                const userRole = this.authProvider.userRole();
 
                 console.log("userRole");
                 console.log(userRole);

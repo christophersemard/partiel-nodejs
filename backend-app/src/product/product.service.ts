@@ -59,4 +59,10 @@ export class ProductService {
             data: { deletedAt: null },
         });
     }
+
+    async findDeleted() {
+        return this.prisma.product.findMany({
+            where: { deletedAt: { not: null } },
+        });
+    }
 }

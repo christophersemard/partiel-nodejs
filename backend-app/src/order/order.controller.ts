@@ -14,15 +14,15 @@ import {
     BadRequestException,
 } from "@nestjs/common";
 import { OrderService } from "./order.service";
-import { JwtAuthGuard } from "../auth/jwt.guard";
 import { OrderStatus, Role } from "@prisma/client";
+import { JwtAuthGuard } from "../auth/jwt.guard";
 import { Request } from "express";
 
 interface AuthenticatedRequest extends Request {
     user: { userId: string; email: string; role: Role };
 }
 
-@Controller("orders")
+@Controller("api/orders")
 export class OrderController {
     constructor(private readonly orderService: OrderService) {}
 
@@ -77,6 +77,14 @@ export class OrderController {
             req.user.userId,
             req.user.role
         );
+    }
+
+    // SHIP
+
+    @UseGuards(JwtAuthGuard)
+    @Patch(":id/ship")
+    async shipOrder(@Param("id") id: string, @Req() req: AuthenticatedRequest) {
+        return this.orderService.shipOrder(id, req.user.userId, req.user.role);
     }
 
     @UseGuards(JwtAuthGuard)

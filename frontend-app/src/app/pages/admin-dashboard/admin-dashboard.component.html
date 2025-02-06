@@ -1,0 +1,73 @@
+<div class="container mt-4">
+    <h2 class=" mb-4">Tableau de Bord Admin</h2>
+
+    <div *ngIf="stats; else loading">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card text-bg-primary shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Commandes</h5>
+                        <p class="fs-3">{{ stats.totalOrders }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card text-bg-success shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Commandes Expédiées</h5>
+                        <p class="fs-3">{{ stats.shippedOrders }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card text-bg-warning shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Commandes en Cours</h5>
+                        <p class="fs-3">{{ stats.pendingOrders }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mt-3">
+                <div class="card text-bg-danger shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Commandes Annulées</h5>
+                        <p class="fs-3">{{ stats.cancelledOrders }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mt-3">
+                <div class="card text-bg-info shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Produits en Stock</h5>
+                        <p class="fs-3">{{ stats.totalStock }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mt-3">
+                <div class="card text-bg-dark shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Produits Supprimés</h5>
+                        <p class="fs-3">{{ stats.deletedProducts }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="mt-4">Top Produits Vendus</h3>
+        <ul class="list-group">
+            <li *ngFor="let product of stats.topProducts" class="list-group-item d-flex justify-content-between">
+                <span>{{ product.name }}</span>
+                <span class="badge bg-primary">{{ product.sales }} ventes</span>
+            </li>
+        </ul>
+    </div>
+
+    <ng-template #loading>
+        <div class="alert alert-info text-center">Chargement des statistiques...</div>
+    </ng-template>
+</div>

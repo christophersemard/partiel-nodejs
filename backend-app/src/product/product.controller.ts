@@ -20,7 +20,7 @@ interface AuthenticatedRequest extends Request {
     user: { userId: string; email: string; role: Role };
 }
 
-@Controller("products")
+@Controller("api/products")
 export class ProductController {
     constructor(private readonly productService: ProductService) {}
 
@@ -92,5 +92,17 @@ export class ProductController {
             throw new ForbiddenException("Accès interdit.");
         }
         return this.productService.restore(id);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Get(":id/deleted")
+    async getDeletedProduct(
+        @Param("id") id: string,
+        @Req() req: AuthenticatedRequest
+    ) {
+        if (req.user.role !== Role.ADMIN) {
+            throw new ForbiddenException("Accès interdit.");
+        }
+        return this.productService.findDeleted();
     }
 }

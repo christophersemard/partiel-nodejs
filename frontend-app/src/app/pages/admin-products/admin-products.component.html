@@ -1,0 +1,36 @@
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Gestion des produits</h2>
+        <button class="btn btn-primary" (click)="openForm()">Ajouter un produit</button>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prix (€)</th>
+                <th>Stock</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of products.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)">
+                <td>{{ product.name }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.stock }}</td>
+                <td>
+                    <button class="btn btn-outline-primary btn-sm me-2" (click)="openForm(product)">Modifier</button>
+                    <button class="btn btn-danger btn-sm" (click)="deleteProduct(product.id)">Supprimer</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-end">
+        <app-pagination [totalItems]="products.length" [itemsPerPage]="itemsPerPage" [currentPage]="currentPage"
+            (pageChanged)="changePage($event)"></app-pagination>
+    </div>
+    <app-product-form *ngIf="showForm" [product]="selectedProduct" (save)="saveProduct($event)"
+        (cancel)="showForm = false"></app-product-form>
+</div>

@@ -1,7 +1,8 @@
-import { Component, inject } from "@angular/core";
+import { Component, computed, inject, signal } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterModule, Router } from "@angular/router";
 import { AuthProviderService } from "../../services/auth-provider.service";
+import { CartService } from "../../services/cart.service";
 
 @Component({
     selector: "app-header",
@@ -11,10 +12,36 @@ import { AuthProviderService } from "../../services/auth-provider.service";
 })
 export class HeaderComponent {
     authProvider = inject(AuthProviderService);
+    cartService = inject(CartService);
     private router = inject(Router);
 
-    logout() {
+    // Computed -> Mise à jour automatique
+    isAuthenticated = computed(() => {
+        console.log("isAuthenticated");
+        console.log(this.authProvider.isAuthenticated());
+        return this.authProvider.isAuthenticated();
+    });
+    isAdmin = computed(() => {
+        console.log("isAdmin");
+        console.log(this.authProvider.isAdmin());
+        return this.authProvider.isAdmin();
+    });
+    cartItemCount = signal(0);
+
+    constructor() {
+        this.updateCartCount();
+    }
+
+    updateCartCount(): void {
+        this.cartItemCount.set(
+            this.cartService
+                .getCart()
+                .reduce((total, item) => total + item.quantity, 0)
+        );
+    }
+
+    logout(): void {
         this.authProvider.logout();
-        this.router.navigate(["/login"]); // Rediriger vers la page de connexion
+        this.router.navigate(["/login"]);
     }
 }

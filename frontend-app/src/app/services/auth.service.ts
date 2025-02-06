@@ -7,7 +7,7 @@ import { AuthProviderService } from "./auth-provider.service";
     providedIn: "root",
 })
 export class AuthService {
-    private apiUrl = "http://localhost:3000/auth"; // URL du backend
+    private apiUrl = "http://localhost:3000/api/auth"; // URL du backend
 
     constructor(
         private http: HttpClient,

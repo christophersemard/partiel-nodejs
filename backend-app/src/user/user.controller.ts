@@ -16,7 +16,7 @@ interface AuthenticatedRequest extends Request {
     user: { userId: string; email: string; role: Role };
 }
 
-@Controller("users")
+@Controller("api/users")
 @UseGuards(JwtAuthGuard)
 export class UserController {
     constructor(private readonly userService: UserService) {}

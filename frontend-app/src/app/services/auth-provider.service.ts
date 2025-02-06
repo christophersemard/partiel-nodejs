@@ -11,48 +11,46 @@ export class AuthProviderService {
         localStorage.getItem(this.tokenKey)
     );
 
-    // Computed signal pour vérifier si l'utilisateur est connecté
-    isAuthenticated = computed(() => !!this.userToken());
+    // Signal calculé pour vérifier si l'utilisateur est connecté
+    isAuthenticated = computed(() => {
+        // Est authentifié si le token est présent et que le role est défini sur CLIENT mais pas sur ADMIN
+        return this.userToken() !== null && this.userRole() === "CLIENT";
+    });
+
+    // Signal calculé pour récupérer le rôle de l'utilisateur
+    userRole = computed(() => this.decodeUserRole());
 
     constructor() {}
 
-    // Connexion : Stocker le token et décoder le rôle
-    login(token: string) {
+    login(token: string): void {
         localStorage.setItem(this.tokenKey, token);
         this.userToken.set(token);
     }
 
-    // Récupérer le token JWT
     getToken(): string | null {
         return this.userToken();
     }
 
-    // Déconnexion
-    logout() {
+    logout(): void {
         localStorage.removeItem(this.tokenKey);
         this.userToken.set(null);
     }
 
-    // Décoder le JWT pour récupérer le rôle utilisateur
-    getUserRole(): string | null {
+    private decodeUserRole(): string | null {
         const token = this.getToken();
-        console.log("token");
-        console.log(token);
         if (!token) return null;
 
         try {
             const payload = JSON.parse(atob(token.split(".")[1])); // Décodage du JWT
-            console.log("payload");
-            console.log(payload);
-            return payload.role || null; // Récupérer le rôle
+            console.log("Payload", payload);
+            return payload.role || null;
         } catch (error) {
             console.error("Erreur de décodage du JWT", error);
             return null;
         }
     }
 
-    // Vérifier si l'utilisateur est admin
     isAdmin(): boolean {
-        return this.getUserRole() === "admin";
+        return this.userRole() === "ADMIN";
     }
 }

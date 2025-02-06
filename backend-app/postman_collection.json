@@ -16,11 +16,11 @@
             "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"password123\"\n}"
           },
           "url": {
-            "raw": "http://localhost:3000/auth/login",
+            "raw": "http://localhost:3000/api/auth/login",
             "protocol": "http",
             "host": ["localhost"],
             "port": "3000",
-            "path": ["auth", "login"]
+            "path": ["api","auth", "login"]
           }
         }
       },
@@ -34,11 +34,11 @@
             "raw": "{\n  \"email\": \"user2@example.com\",\n  \"password\": \"password123\"\n}"
           },
           "url": {
-            "raw": "http://localhost:3000/auth/login",
+            "raw": "http://localhost:3000/api/auth/login",
             "protocol": "http",
             "host": ["localhost"],
             "port": "3000",
-            "path": ["auth", "login"]
+            "path": ["api","auth", "login"]
           }
         }
       },
@@ -52,11 +52,11 @@
             "raw": "{\n  \"email\": \"wrong@example.com\",\n  \"password\": \"wrongpass\"\n}"
           },
           "url": {
-            "raw": "http://localhost:3000/auth/login",
+            "raw": "http://localhost:3000/api/auth/login",
             "protocol": "http",
             "host": ["localhost"],
             "port": "3000",
-            "path": ["auth", "login"]
+            "path": ["api","auth", "login"]
           }
         }
       },
@@ -71,11 +71,11 @@
             "raw": "{\n  \"email\": \"newuser@example.com\",\n  \"password\": \"password123\"\n}"
           },
           "url": {
-            "raw": "http://localhost:3000/auth/register",
+            "raw": "http://localhost:3000/api/auth/register",
             "protocol": "http",
             "host": ["localhost"],
             "port": "3000",
-            "path": ["auth", "register"]
+            "path": ["api","auth", "register"]
           }
         }
       },
@@ -86,7 +86,7 @@
           "request": {
             "method": "GET",
             "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
-            "url": { "raw": "http://localhost:3000/orders/me", "host": ["localhost"], "port": "3000", "path": ["orders", "me"] }
+            "url": { "raw": "http://localhost:3000/api/orders/me", "host": ["localhost"], "port": "3000", "path": ["api","orders", "me"] }
           }
         },
         {
@@ -94,7 +94,7 @@
           "request": {
             "method": "GET",
             "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
-            "url": { "raw": "http://localhost:3000/orders/:id", "host": ["localhost"], "port": "3000", "path": ["orders", ":id"] }
+            "url": { "raw": "http://localhost:3000/api/orders/:id", "host": ["localhost"], "port": "3000", "path": ["api","orders", ":id"] }
           }
         },
         {
@@ -106,7 +106,7 @@
                 "mode": "raw",
                 "raw": "{ \"products\": [ { \"productId\": \"product_id1\", \"quantity\": 2 }, { \"productId\": \"product_id2\", \"quantity\": 3 } ] }"
               },
-              "url": { "raw": "http://localhost:3000/orders", "host": ["localhost"], "port": "3000", "path": ["orders"] }
+              "url": { "raw": "http://localhost:3000/api/orders", "host": ["localhost"], "port": "3000", "path": ["api","orders"] }
             }
           },
         {
@@ -114,7 +114,7 @@
           "request": {
             "method": "PATCH",
             "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
-            "url": { "raw": "http://localhost:3000/orders/:id/cancel", "host": ["localhost"], "port": "3000", "path": ["orders", ":id", "cancel"] }
+            "url": { "raw": "http://localhost:3000/api/orders/:id/cancel", "host": ["localhost"], "port": "3000", "path": ["api","orders", ":id", "cancel"] }
           }
         },
         {
@@ -123,10 +123,10 @@
             "method": "GET",
             "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
             "url": {
-              "raw": "http://localhost:3000/orders",
+              "raw": "http://localhost:3000/api/orders",
               "host": ["localhost"],
               "port": "3000",
-              "path": ["orders"],
+              "path": ["api","orders"],
               "query": [
                 { "key": "status", "value": "PENDING", "disabled": false },
                 { "key": "date", "value": "2024-01-01", "disabled": false }
@@ -140,7 +140,7 @@
             "method": "PATCH",
             "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }, { "key": "Content-Type", "value": "application/json" }],
             "body": { "mode": "raw", "raw": "{ \"status\": \"SHIPPED\" }" },
-            "url": { "raw": "http://localhost:3000/orders/:id/status", "host": ["localhost"], "port": "3000", "path": ["orders", ":id", "status"] }
+            "url": { "raw": "http://localhost:3000/api/orders/:id/status", "host": ["localhost"], "port": "3000", "path": ["api","orders", ":id", "status"] }
           }
         },
         {
@@ -148,7 +148,7 @@
           "request": {
             "method": "DELETE",
             "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
-            "url": { "raw": "http://localhost:3000/orders/:id/delete", "host": ["localhost"], "port": "3000", "path": ["orders", ":id", "delete"] }
+            "url": { "raw": "http://localhost:3000/api/orders/:id/delete", "host": ["localhost"], "port": "3000", "path": ["api","orders", ":id", "delete"] }
           }
         },
       
@@ -160,7 +160,7 @@
     "request": {
       "method": "GET",
       "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
-      "url": { "raw": "http://localhost:3000/users", "host": ["localhost"], "port": "3000", "path": ["users"] }
+      "url": { "raw": "http://localhost:3000/api/users", "host": ["localhost"], "port": "3000", "path": ["api","users"] }
     }
   },
   {
@@ -168,7 +168,7 @@
     "request": {
       "method": "GET",
       "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
-      "url": { "raw": "http://localhost:3000/users/:id", "host": ["localhost"], "port": "3000", "path": ["users", ":id"] }
+      "url": { "raw": "http://localhost:3000/api/users/:id", "host": ["localhost"], "port": "3000", "path": ["api","users", ":id"] }
     }
   },
   {
@@ -176,7 +176,7 @@
     "request": {
       "method": "GET",
       "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
-      "url": { "raw": "http://localhost:3000/users/:id/orders", "host": ["localhost"], "port": "3000", "path": ["users", ":id", "orders"] }
+      "url": { "raw": "http://localhost:3000/api/users/:id/orders", "host": ["localhost"], "port": "3000", "path": ["api","users", ":id", "orders"] }
     }
   },
 
@@ -184,14 +184,14 @@
     "name": "Voir tous les produits",
     "request": {
       "method": "GET",
-      "url": { "raw": "http://localhost:3000/products", "host": ["localhost"], "port": "3000", "path": ["products"] }
+      "url": { "raw": "http://localhost:3000/api/products", "host": ["localhost"], "port": "3000", "path": ["api","products"] }
     }
   },
   {
     "name": "Voir un produit spécifique",
     "request": {
       "method": "GET",
-      "url": { "raw": "http://localhost:3000/products/:id", "host": ["localhost"], "port": "3000", "path": ["products", ":id"] }
+      "url": { "raw": "http://localhost:3000/api/products/:id", "host": ["localhost"], "port": "3000", "path": ["api","products", ":id"] }
     }
   },
   {
@@ -200,7 +200,7 @@
       "method": "POST",
       "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }, { "key": "Content-Type", "value": "application/json" }],
       "body": { "mode": "raw", "raw": "{ \"name\": \"T-shirt\", \"price\": 19.99, \"stock\": 50, \"imageUrl\": \"https://example.com/tshirt.jpg\" }" },
-      "url": { "raw": "http://localhost:3000/products", "host": ["localhost"], "port": "3000", "path": ["products"] }
+      "url": { "raw": "http://localhost:3000/api/products", "host": ["localhost"], "port": "3000", "path": ["api","products"] }
     }
   },
   {
@@ -208,7 +208,7 @@
     "request": {
       "method": "PATCH",
       "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }, { "key": "Content-Type", "value": "application/json" }],
-      "url": { "raw": "http://localhost:3000/products/:id", "host": ["localhost"], "port": "3000", "path": ["products", ":id"] }
+      "url": { "raw": "http://localhost:3000/api/products/:id", "host": ["localhost"], "port": "3000", "path": ["api","products", ":id"] }
     }
   },
   {
@@ -216,7 +216,7 @@
     "request": {
       "method": "DELETE",
       "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
-      "url": { "raw": "http://localhost:3000/products/:id", "host": ["localhost"], "port": "3000", "path": ["products", ":id"] }
+      "url": { "raw": "http://localhost:3000/api/products/:id", "host": ["localhost"], "port": "3000", "path": ["api","products", ":id"] }
     }
   },
   {
@@ -224,7 +224,7 @@
     "request": {
       "method": "PATCH",
       "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
-      "url": { "raw": "http://localhost:3000/products/:id/restore", "host": ["localhost"], "port": "3000", "path": ["products", ":id", "restore"] }
+      "url": { "raw": "http://localhost:3000/api/products/:id/restore", "host": ["localhost"], "port": "3000", "path": ["api","products", ":id", "restore"] }
     }
   }
       

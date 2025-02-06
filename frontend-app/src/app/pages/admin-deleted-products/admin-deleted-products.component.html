@@ -1,0 +1,26 @@
+<div class="container mt-4">
+    <h2>Produits Supprimés</h2>
+
+    <div *ngIf="deletedProducts.length === 0" class="alert alert-info">
+        Aucun produit supprimé.
+    </div>
+
+    <table *ngIf="deletedProducts.length > 0" class="table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prix</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of deletedProducts">
+                <td>{{ product.name }}</td>
+                <td>{{ product.price }} €</td>
+                <td>
+                    <button class="btn btn-success btn-sm" (click)="restoreProduct(product.id)">Restaurer</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

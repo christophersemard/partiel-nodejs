@@ -6,23 +6,49 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
+            <ul class="navbar-nav ms-auto d-flex align-items-center flex-column flex-lg-row  gap-4">
+                <li class="nav-item" *ngIf="!isAdmin()">
                     <a class="nav-link" routerLink="/products" routerLinkActive="active">Produits</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/cart" routerLinkActive="active">Panier</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/orders" routerLinkActive="active">Mes commandes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-danger fw-bold" routerLink="/login">Connexion</a>
-                </li>
-                <li class="nav-item cursor-pointer" *ngIf="authProvider.isAuthenticated()">
-                    <a class="nav-link text-danger fw-bold" (click)="logout()">Déconnexion</a>
+
+                <li class="nav-item" *ngIf="!isAdmin()">
+                    <a class="nav-link position-relative" routerLink="/cart" routerLinkActive="active">
+                        Panier
+                        <span *ngIf="cartItemCount() > 0"
+                            class="badge bg-danger rounded-circle position-absolute top-25 start-100 translate-middle">
+                            {{ cartItemCount() }}
+                        </span>
+
+                    </a>
                 </li>
 
+                <li class="nav-item" *ngIf="isAuthenticated()">
+                    <a class="nav-link" routerLink="/orders" routerLinkActive="active">Mes commandes</a>
+                </li>
+
+                <li class="nav-item" *ngIf="isAdmin()">
+                    <a class="nav-link text-warning" routerLink="/admin">Admin</a>
+                </li>
+
+                <li class="nav-item" *ngIf="isAdmin()">
+                    <a class="nav-link" routerLink="/admin/orders" routerLinkActive="active">Commandes</a>
+                </li>
+                <li class="nav-item" *ngIf="isAdmin()">
+                    <a class="nav-link" routerLink="/admin/products" routerLinkActive="active">Produits</a>
+                </li>
+
+
+                <li class="nav-item" *ngIf="!isAuthenticated() && !isAdmin()">
+                    <a class="nav-link text-danger fw-bold" routerLink="/login">Connexion</a>
+                </li>
+
+                <li class="nav-item" *ngIf="!isAuthenticated() && !isAdmin()">
+                    <a class="nav-link text-primary fw-bold" routerLink="/register">Inscription</a>
+                </li>
+
+                <li class="nav-item cursor-pointer" *ngIf="isAuthenticated() || isAdmin()">
+                    <a class="nav-link text-danger fw-bold" (click)="logout()">Déconnexion</a>
+                </li>
             </ul>
         </div>
     </div>
