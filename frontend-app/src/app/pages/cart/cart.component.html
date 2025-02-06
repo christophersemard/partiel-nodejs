@@ -1,4 +1,16 @@
+<!-- Toast Bootstrap -->
+<div class="toast show position-fixed bottom-0 end-0 m-3 bg-success text-white p-2 rounded" *ngIf="showToast"
+    role="alert">
+    <div class="d-flex">
+        <div class="toast-body">
+            {{ message}}
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto z-3" (click)="showToast = false"></button>
+    </div>
+</div>
+
 <div class="container mt-4">
+
     <h2>Votre Panier</h2>
     <div *ngIf="cart.length === 0" class="alert alert-info">Votre panier est vide.</div>
 

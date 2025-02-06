@@ -17,28 +17,12 @@ export class HeaderComponent {
 
     // Computed -> Mise à jour automatique
     isAuthenticated = computed(() => {
-        console.log("isAuthenticated");
-        console.log(this.authProvider.isAuthenticated());
         return this.authProvider.isAuthenticated();
     });
     isAdmin = computed(() => {
-        console.log("isAdmin");
-        console.log(this.authProvider.isAdmin());
         return this.authProvider.isAdmin();
     });
-    cartItemCount = signal(0);
-
-    constructor() {
-        this.updateCartCount();
-    }
-
-    updateCartCount(): void {
-        this.cartItemCount.set(
-            this.cartService
-                .getCart()
-                .reduce((total, item) => total + item.quantity, 0)
-        );
-    }
+    cartItemCount = computed(() => this.cartService.getCartSize() || 0);
 
     logout(): void {
         this.authProvider.logout();

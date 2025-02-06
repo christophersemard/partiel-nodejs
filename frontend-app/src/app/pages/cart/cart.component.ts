@@ -20,6 +20,9 @@ export class CartComponent implements OnInit {
         private router: Router
     ) {}
 
+    showToast = false;
+    message = "";
+
     ngOnInit(): void {
         this.loadCart();
     }
@@ -31,16 +34,34 @@ export class CartComponent implements OnInit {
     increaseQuantity(productId: string): void {
         this.cartService.updateQuantity(productId, 1);
         this.loadCart();
+        this.showToast = true;
+        this.message = "Quantité mise à jour";
+
+        setTimeout(() => {
+            this.showToast = false;
+        }, 3000);
     }
 
     decreaseQuantity(productId: string): void {
         this.cartService.updateQuantity(productId, -1);
         this.loadCart();
+        this.showToast = true;
+        this.message = "Quantité mise à jour";
+
+        setTimeout(() => {
+            this.showToast = false;
+        }, 3000);
     }
 
     removeFromCart(productId: string): void {
         this.cartService.removeFromCart(productId);
         this.loadCart();
+        this.showToast = true;
+        this.message = "Produit retiré du panier";
+
+        setTimeout(() => {
+            this.showToast = false;
+        }, 3000);
     }
 
     validateOrder(): void {
@@ -55,6 +76,14 @@ export class CartComponent implements OnInit {
 
         this.orderService.createOrder(orderData).subscribe((order) => {
             this.cartService.clearCart(); // Vider le panier après validation
+
+            this.showToast = true;
+
+            setTimeout(() => {
+                this.showToast = false;
+                this.message = "Commande validée";
+            }, 3000);
+
             this.router.navigate([`/orders/${order.id}`]); // Rediriger vers la commande créée
         });
     }

@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, signal, computed } from "@angular/core";
 
 @Injectable({
     providedIn: "root",
@@ -7,6 +7,8 @@ export class CartService {
     private cartKey = "cart_items";
 
     constructor() {}
+
+    private cart = signal(this.getCart());
 
     getCart(): any[] {
         const cart = localStorage.getItem(this.cartKey);
@@ -51,5 +53,10 @@ export class CartService {
 
     private saveCart(cart: any[]): void {
         localStorage.setItem(this.cartKey, JSON.stringify(cart));
+    }
+
+    // Connaitre le nombre d'articles dans le panier en direct avec un signal qui s'actualise automatiquement
+    getCartSize(): number {
+        return this.cart().reduce((acc, item) => acc + item.quantity, 0);
     }
 }

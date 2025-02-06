@@ -221,3 +221,17 @@ h2{
     font-weight: 700;
     margin-bottom: 20px !important;
 }
+h1, h3, h4, h5, h6 {
+    color: $primary;
+    font-weight: 700;
+}
+
+.toast {
+    z-index: 1050 !important; /* Plus élevé que les cartes */
+    position: fixed !important;
+    bottom: 20px;
+    right: 20px;
+    min-width: 250px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 0 !important;
+}

@@ -4,6 +4,13 @@ import * as bcrypt from "bcrypt";
 const prisma = new PrismaClient();
 
 async function main() {
+    await prisma.orderItem.deleteMany(); // Supprime les items de commandes
+    await prisma.order.deleteMany(); // Supprime toutes les commandes
+    await prisma.product.deleteMany(); // Supprime tous les produits
+    await prisma.user.deleteMany(); // Supprime tous les utilisateurs
+
+    console.log("Données existantes supprimées.");
+
     // Hash du mot de passe
     const hashedPassword: string = await bcrypt.hash("password123", 10);
 
