@@ -1,0 +1,15 @@
+<div class=" d-flex w-100">
+    <div class="card shadow-sm w-100">
+        <img [src]="product.imageUrl" class="card-img-top product-image" alt="{{ product.name }}">
+        <div class="card-body d-flex flex-column">
+            <h5 class="card-title">{{ product.name }}</h5>
+            <p class="card-text text-muted">{{ product.description }}</p>
+            <p class="card-text fw-bold">{{ product.price }} €</p>
+
+            <div class="mt-auto d-flex justify-content-between">
+                <a [routerLink]="['/products', product.id]" class="btn btn-outline-primary">Détails</a>
+                <button class="btn btn-success" (click)="addToCart()">Ajouter</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -19,6 +19,10 @@
                 <li class="nav-item">
                     <a class="nav-link text-danger fw-bold" routerLink="/login">Connexion</a>
                 </li>
+                <li class="nav-item cursor-pointer" *ngIf="authProvider.isAuthenticated()">
+                    <a class="nav-link text-danger fw-bold" (click)="logout()">Déconnexion</a>
+                </li>
+
             </ul>
         </div>
     </div>

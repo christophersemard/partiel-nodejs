@@ -1,2 +1,8 @@
-<h1 class="text-primary">Nos produits</h1>
-<p>Voici la liste de nos produits disponibles.</p>
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Nos Produits</h2>
+    <div class="row g-4">
+        <div class="col-lg-4 col-md-6 col-sm-12 d-flex" *ngFor="let product of products">
+            <app-product-card [product]="product" class=" w-100"></app-product-card>
+        </div>
+    </div>
+</div>

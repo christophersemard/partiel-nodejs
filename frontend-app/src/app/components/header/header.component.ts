@@ -1,10 +1,20 @@
-import { Component } from "@angular/core";
-import { RouterModule } from "@angular/router";
+import { Component, inject } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { RouterModule, Router } from "@angular/router";
+import { AuthProviderService } from "../../services/auth-provider.service";
 
 @Component({
     selector: "app-header",
-    imports: [RouterModule],
+    standalone: true,
     templateUrl: "./header.component.html",
-    styleUrl: "./header.component.scss",
+    imports: [CommonModule, RouterModule],
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+    authProvider = inject(AuthProviderService);
+    private router = inject(Router);
+
+    logout() {
+        this.authProvider.logout();
+        this.router.navigate(["/login"]); // Rediriger vers la page de connexion
+    }
+}
