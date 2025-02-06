@@ -35,11 +35,13 @@ export class OrderDetailComponent implements OnInit {
 
     calculateTotal(): void {
         if (this.order && this.order.items) {
-            this.total = this.order.items.reduce(
+            let value = this.order.items.reduce(
                 (sum: number, item: any) =>
                     sum + item.product.price * item.quantity,
                 0
             );
+
+            this.total = value.toFixed(2);
         }
     }
 }

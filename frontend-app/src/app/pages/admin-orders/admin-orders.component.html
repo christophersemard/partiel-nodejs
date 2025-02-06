@@ -32,12 +32,20 @@
                     <span [class]="getStatusBadge(order.status)">{{ order.status == "PENDING" ? "En attente":
                         order.status == "SHIPPED" ? "Expediée": "Annulée" }}</span>
                 </td>
-                <td>
-                    <button class="btn btn-success btn-sm me-2" *ngIf="order.status === 'PENDING'"
-                        (click)="openModal(order, 'ship')">Expédier</button>
-                    <button class="btn btn-danger btn-sm" *ngIf="order.status === 'PENDING'"
-                        (click)="openModal(order, 'cancel')">Annuler</button>
+                <td class="">
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-success btn-sm d-flex align-items-center gap-2 me-2"
+                            *ngIf="order.status === 'PENDING'" (click)="openModal(order, 'ship')">
+                            <i class="bi bi-truck"></i> Expédier
+                        </button>
+                        <button class="btn btn-danger btn-sm d-flex align-items-center gap-2"
+                            *ngIf="order.status === 'PENDING'" (click)="openModal(order, 'cancel')">
+                            <i class="bi bi-x-circle"></i> Annuler
+                        </button>
+                    </div>
                 </td>
+
+
             </tr>
         </tbody>
     </table>
@@ -52,12 +60,12 @@
                 <button type="button" class="btn-close" (click)="closeModal()"></button>
             </div>
             <div class="modal-body">
-                <p *ngIf="actionType === 'ship'">Are you sure you want to ship this order?</p>
-                <p *ngIf="actionType === 'cancel'">Are you sure you want to cancel this order?</p>
+                <p *ngIf="actionType === 'ship'">Êtes-vous sûr de vouloir expédier cette commande ?</p>
+                <p *ngIf="actionType === 'cancel'">Êtes-vous sûr de vouloir annuler cette commande ?</p>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" (click)="closeModal()">Cancel</button>
-                <button class="btn btn-primary" (click)="confirmAction()">Confirm</button>
+                <button class="btn btn-secondary" (click)="closeModal()">Annuler</button>
+                <button class="btn btn-primary" (click)="confirmAction()">Confirmer</button>
             </div>
         </div>
     </div>

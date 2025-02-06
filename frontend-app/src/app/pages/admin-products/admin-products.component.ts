@@ -17,6 +17,7 @@ export class AdminProductsComponent implements OnInit {
     itemsPerPage: number = 5;
     selectedProduct: any | null = null;
     showForm: boolean = false;
+    successMessage: string = "";
 
     constructor(private productService: ProductService) {}
 
@@ -38,25 +39,35 @@ export class AdminProductsComponent implements OnInit {
         this.showForm = true;
     }
 
+    showSuccessMessage(message: string): void {
+        this.successMessage = message;
+        setTimeout(() => {
+            this.successMessage = "";
+        }, 3000);
+    }
+
     saveProduct(product: any): void {
         if (product.id) {
             this.productService
                 .updateProduct(product.id, product)
                 .subscribe(() => {
                     this.loadProducts();
+                    this.showSuccessMessage("Produit modifié avec succès !");
                 });
         } else {
             this.productService.createProduct(product).subscribe(() => {
                 this.loadProducts();
+                this.showSuccessMessage("Produit ajouté avec succès !");
             });
         }
         this.showForm = false;
     }
 
     deleteProduct(productId: string): void {
-        if (confirm("Êtes-vous sûr de vouloir supprimer ce produit ?")) {
+        if (confirm("Voulez-vous vraiment supprimer ce produit ?")) {
             this.productService.deleteProduct(productId).subscribe(() => {
                 this.loadProducts();
+                this.showSuccessMessage("Produit supprimé avec succès !");
             });
         }
     }

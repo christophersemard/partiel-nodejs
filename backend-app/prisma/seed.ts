@@ -46,7 +46,9 @@ async function main() {
         description: `Description du produit ${i + 1}`,
         price: parseFloat((Math.random() * 100 + 10).toFixed(2)),
         stock: Math.floor(Math.random() * 200) + 10,
-        imageUrl: `https://example.com/produit${i + 1}.jpg`,
+        imageUrl: `https://picsum.photos/${
+            Math.floor(Math.random() * 200) + 300
+        }/${Math.floor(Math.random() * 200) + 300}`,
     }));
 
     await prisma.product.createMany({

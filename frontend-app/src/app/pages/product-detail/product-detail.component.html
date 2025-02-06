@@ -1,7 +1,8 @@
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-6">
-            <img [src]="product?.imageUrl" class="img-fluid rounded shadow-sm w-100" alt="{{ product?.name }}">
+            <img [src]="product?.imageUrl" class="img-fluid shadow-sm w-100" style="max-height: 500px;"
+                alt="{{ product?.name }}">
         </div>
         <div class="col-md-6">
             <h2>{{ product?.name }}</h2>
@@ -9,14 +10,12 @@
             <p class="fw-bold fs-4">{{ product?.price }} €</p>
 
             <div class="d-flex align-items-center gap-3">
-                <button class="btn btn-outline-secondary" (click)="decreaseQuantity()">-</button>
-                <span class="fs-5">{{ quantity }}</span>
-                <button class="btn btn-outline-secondary" (click)="increaseQuantity()">+</button>
-            </div>
-
-            <div class="mt-3">
+                <button class="btn btn-primary" (click)="decreaseQuantity()">-</button>
+                <span class="fs-5 p-1 px-3 border ">{{ quantity }}</span>
+                <button class="btn btn-primary" (click)="increaseQuantity()">+</button>
                 <button class="btn btn-success me-2" (click)="addToCart()">Ajouter au panier</button>
             </div>
+
         </div>
     </div>
 </div>

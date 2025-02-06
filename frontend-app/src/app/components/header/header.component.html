@@ -1,12 +1,12 @@
 <nav class="navbar navbar-expand-lg bg-light shadow-sm">
     <div class="container">
-        <a class="navbar-brand text-primary fw-bold" routerLink="/">MyStore</a>
+        <a class="navbar-brand text-secondary fw-bold" routerLink="/">MyStore</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto d-flex align-items-center flex-column flex-lg-row  gap-4">
+            <ul class="navbar-nav ms-auto d-flex align-items-center flex-column flex-lg-row  gap-4 me-5">
                 <li class="nav-item" *ngIf="!isAdmin()">
                     <a class="nav-link" routerLink="/products" routerLinkActive="active">Produits</a>
                 </li>
@@ -27,7 +27,7 @@
                 </li>
 
                 <li class="nav-item" *ngIf="isAdmin()">
-                    <a class="nav-link text-warning" routerLink="/admin">Admin</a>
+                    <a class="nav-link" routerLink="/admin">Admin</a>
                 </li>
 
                 <li class="nav-item" *ngIf="isAdmin()">
@@ -38,18 +38,17 @@
                 </li>
 
 
-                <li class="nav-item" *ngIf="!isAuthenticated() && !isAdmin()">
-                    <a class="nav-link text-danger fw-bold" routerLink="/login">Connexion</a>
-                </li>
 
-                <li class="nav-item" *ngIf="!isAuthenticated() && !isAdmin()">
-                    <a class="nav-link text-primary fw-bold" routerLink="/register">Inscription</a>
-                </li>
-
-                <li class="nav-item cursor-pointer" *ngIf="isAuthenticated() || isAdmin()">
-                    <a class="nav-link text-danger fw-bold" (click)="logout()">Déconnexion</a>
-                </li>
             </ul>
+            <div class="d-flex align-items-center gap-2">
+                <a class=" btn btn-secondary btn-sm" *ngIf="!isAuthenticated() && !isAdmin()"
+                    routerLink="/login">Connexion</a>
+                <a class=" btn btn-outline-secondary btn-sm" *ngIf="!isAuthenticated() && !isAdmin()"
+                    routerLink="/register">Inscription</a>
+
+                <a class=" btn btn-outline-danger btn-sm" *ngIf="isAuthenticated() || isAdmin()"
+                    (click)="logout()">Déconnexion</a>
+            </div>
         </div>
     </div>
 </nav>

@@ -5,7 +5,7 @@
         <p><strong>ID :</strong> {{ order.id }}</p>
         <p><strong>Statut :</strong> {{ order.status == "PENDING" ? "En attente":
             order.status == "SHIPPED" ? "Expediée": "Annulée" }}</p>
-        <p><strong>Date :</strong>{{ order.createdAt | date:'dd/MM/yyyy HH:MM'}}</p>
+        <p><strong>Date : </strong>{{ order.createdAt | date:'dd/MM/yyyy HH:MM'}}</p>
 
         <h4>Produits commandés</h4>
         <ul class="list-group">
@@ -15,7 +15,7 @@
                     <h5>{{ item.product.name }}</h5>
                     <p class="text-muted">Quantité : {{ item.quantity }}</p>
                 </div>
-                <span class="badge bg-primary">{{ item.product.price * item.quantity }} €</span>
+                <span class="badge bg-primary">{{ item.product.price * item.quantity | number:'1.0-2'}} €</span>
             </li>
         </ul>
 
