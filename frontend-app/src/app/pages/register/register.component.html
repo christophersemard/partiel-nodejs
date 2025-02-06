@@ -1,0 +1,26 @@
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="col-md-4 p-4 bg-white shadow-lg rounded">
+        <h2 class="text-center text-primary">Inscription</h2>
+
+        <form>
+            <div class="mb-3">
+                <label for="name" class="form-label">Nom complet</label>
+                <input type="text" class="form-control" id="name" placeholder="Votre nom">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Votre email">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Mot de passe</label>
+                <input type="password" class="form-control" id="password" placeholder="Votre mot de passe">
+            </div>
+
+            <button type="submit" class="btn btn-secondary w-100">S'inscrire</button>
+        </form>
+
+        <div class="text-center mt-3">
+            <p>Déjà un compte ? <a routerLink="/login" class="text-primary fw-bold">Connectez-vous</a></p>
+        </div>
+    </div>
+</div>

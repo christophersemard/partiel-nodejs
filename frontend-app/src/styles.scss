@@ -1,9 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
-@import "tailwindcss";
+// Importer Bootstrap en mode customisable
+@import "../node_modules/bootstrap/scss/_functions.scss";
+@import "../node_modules/bootstrap/scss/_variables.scss";
 
+// Définir une nouvelle palette de couleurs
+$primary: #2C2C2C; // Gris anthracite chic
+$secondary: #D5BDAF; // Beige doux
+$light: #F8F8F8; // Fond clair légèrement cassé
+$dark: #333333; // Texte gris foncé
+$accent: #A68A64; // Or doux / bronze
+$border-color: #E0E0E0; // Gris clair pour les bordures
 
-:root{
-    color-scheme: light;
-}
+// Créer une nouvelle carte de couleurs Bootstrap
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  "light": $light,
+  "dark": $dark,
+  "accent": $accent,
+  "border": $border-color
+);
 
-
+// Appliquer les nouvelles couleurs au framework Bootstrap
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
