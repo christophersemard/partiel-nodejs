@@ -1,0 +1,237 @@
+{
+    "info": {
+      "_postman_id": "12345678-abcd-efgh-ijkl-1234567890ab",
+      "name": "Gestion Inventaire Boutique API",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+    
+      {
+        "name": "Se connecter (admin)",
+        "request": {
+          "method": "POST",
+          "header": [{ "key": "Content-Type", "value": "application/json" }],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"password123\"\n}"
+          },
+          "url": {
+            "raw": "http://localhost:3000/auth/login",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["auth", "login"]
+          }
+        }
+      },
+      {
+        "name": "Se connecter (user)",
+        "request": {
+          "method": "POST",
+          "header": [{ "key": "Content-Type", "value": "application/json" }],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"email\": \"user2@example.com\",\n  \"password\": \"password123\"\n}"
+          },
+          "url": {
+            "raw": "http://localhost:3000/auth/login",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["auth", "login"]
+          }
+        }
+      },
+      {
+        "name": "Tester connexion avec mauvais identifiants",
+        "request": {
+          "method": "POST",
+          "header": [{ "key": "Content-Type", "value": "application/json" }],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"email\": \"wrong@example.com\",\n  \"password\": \"wrongpass\"\n}"
+          },
+          "url": {
+            "raw": "http://localhost:3000/auth/login",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["auth", "login"]
+          }
+        }
+      },
+     
+      {
+        "name": "S'inscrire (register)",
+        "request": {
+          "method": "POST",
+          "header": [{ "key": "Content-Type", "value": "application/json" }],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"email\": \"newuser@example.com\",\n  \"password\": \"password123\"\n}"
+          },
+          "url": {
+            "raw": "http://localhost:3000/auth/register",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["auth", "register"]
+          }
+        }
+      },
+
+
+        {
+          "name": "Voir mes commandes",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+            "url": { "raw": "http://localhost:3000/orders/me", "host": ["localhost"], "port": "3000", "path": ["orders", "me"] }
+          }
+        },
+        {
+          "name": "Voir une commande spécifique",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+            "url": { "raw": "http://localhost:3000/orders/:id", "host": ["localhost"], "port": "3000", "path": ["orders", ":id"] }
+          }
+        },
+        {
+            "name": "Créer une commande avec quantités",
+            "request": {
+              "method": "POST",
+              "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }, { "key": "Content-Type", "value": "application/json" }],
+              "body": {
+                "mode": "raw",
+                "raw": "{ \"products\": [ { \"productId\": \"product_id1\", \"quantity\": 2 }, { \"productId\": \"product_id2\", \"quantity\": 3 } ] }"
+              },
+              "url": { "raw": "http://localhost:3000/orders", "host": ["localhost"], "port": "3000", "path": ["orders"] }
+            }
+          },
+        {
+          "name": "Annuler une commande",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+            "url": { "raw": "http://localhost:3000/orders/:id/cancel", "host": ["localhost"], "port": "3000", "path": ["orders", ":id", "cancel"] }
+          }
+        },
+        {
+          "name": "Voir toutes les commandes (Admin)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+            "url": {
+              "raw": "http://localhost:3000/orders",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["orders"],
+              "query": [
+                { "key": "status", "value": "PENDING", "disabled": false },
+                { "key": "date", "value": "2024-01-01", "disabled": false }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Mettre à jour le statut d'une commande (Admin)",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"status\": \"SHIPPED\" }" },
+            "url": { "raw": "http://localhost:3000/orders/:id/status", "host": ["localhost"], "port": "3000", "path": ["orders", ":id", "status"] }
+          }
+        },
+        {
+          "name": "Supprimer une commande (Admin)",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+            "url": { "raw": "http://localhost:3000/orders/:id/delete", "host": ["localhost"], "port": "3000", "path": ["orders", ":id", "delete"] }
+          }
+        },
+      
+      
+      
+      
+  {
+    "name": "Voir tous les utilisateurs (Admin)",
+    "request": {
+      "method": "GET",
+      "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+      "url": { "raw": "http://localhost:3000/users", "host": ["localhost"], "port": "3000", "path": ["users"] }
+    }
+  },
+  {
+    "name": "Voir un utilisateur spécifique (Admin)",
+    "request": {
+      "method": "GET",
+      "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+      "url": { "raw": "http://localhost:3000/users/:id", "host": ["localhost"], "port": "3000", "path": ["users", ":id"] }
+    }
+  },
+  {
+    "name": "Voir les commandes d'un utilisateur (Admin)",
+    "request": {
+      "method": "GET",
+      "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+      "url": { "raw": "http://localhost:3000/users/:id/orders", "host": ["localhost"], "port": "3000", "path": ["users", ":id", "orders"] }
+    }
+  },
+
+  {
+    "name": "Voir tous les produits",
+    "request": {
+      "method": "GET",
+      "url": { "raw": "http://localhost:3000/products", "host": ["localhost"], "port": "3000", "path": ["products"] }
+    }
+  },
+  {
+    "name": "Voir un produit spécifique",
+    "request": {
+      "method": "GET",
+      "url": { "raw": "http://localhost:3000/products/:id", "host": ["localhost"], "port": "3000", "path": ["products", ":id"] }
+    }
+  },
+  {
+    "name": "Créer un produit (Admin)",
+    "request": {
+      "method": "POST",
+      "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }, { "key": "Content-Type", "value": "application/json" }],
+      "body": { "mode": "raw", "raw": "{ \"name\": \"T-shirt\", \"price\": 19.99, \"stock\": 50, \"imageUrl\": \"https://example.com/tshirt.jpg\" }" },
+      "url": { "raw": "http://localhost:3000/products", "host": ["localhost"], "port": "3000", "path": ["products"] }
+    }
+  },
+  {
+    "name": "Modifier un produit (Admin)",
+    "request": {
+      "method": "PATCH",
+      "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }, { "key": "Content-Type", "value": "application/json" }],
+      "url": { "raw": "http://localhost:3000/products/:id", "host": ["localhost"], "port": "3000", "path": ["products", ":id"] }
+    }
+  },
+  {
+    "name": "Supprimer un produit (Admin, Soft Delete)",
+    "request": {
+      "method": "DELETE",
+      "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+      "url": { "raw": "http://localhost:3000/products/:id", "host": ["localhost"], "port": "3000", "path": ["products", ":id"] }
+    }
+  },
+  {
+    "name": "Restaurer un produit supprimé (Admin)",
+    "request": {
+      "method": "PATCH",
+      "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+      "url": { "raw": "http://localhost:3000/products/:id/restore", "host": ["localhost"], "port": "3000", "path": ["products", ":id", "restore"] }
+    }
+  }
+      
+      
+      
+      
+    ]
+    
+  }
+  
