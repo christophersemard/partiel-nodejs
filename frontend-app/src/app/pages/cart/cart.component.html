@@ -41,7 +41,12 @@
 
         <div class="mt-4 text-end" *ngIf="cart.length > 0">
             <h4 class="fw-bold text-primary">Total : {{ getTotal() | number:'1.0-2' }} €</h4>
-            <button class="btn btn-success btn-lg mt-2 w-100 fw-bold" (click)="validateOrder()">
+            <button *ngIf="isAuthenticated()" class="btn btn-success btn-lg mt-2 w-100 fw-bold"
+                (click)="validateOrder()">
+                <i class="bi bi-check-circle"></i> Valider la commande
+            </button>
+            <button *ngIf="!isAuthenticated()" title="Connectez-vous pour valider la commande" disabled="true"
+                class="btn btn-success  btn-lg mt-2 w-100 fw-bold" (click)="validateOrder()">
                 <i class="bi bi-check-circle"></i> Valider la commande
             </button>
         </div>

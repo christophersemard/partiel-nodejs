@@ -1,8 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, computed, inject, signal } from "@angular/core";
 import { CartService } from "../../services/cart.service";
 import { OrderService } from "../../services/order.service";
 import { Router } from "@angular/router";
 import { CommonModule } from "@angular/common";
+import { AuthProviderService } from "../../services/auth-provider.service";
 
 @Component({
     selector: "app-cart",
@@ -13,6 +14,7 @@ import { CommonModule } from "@angular/common";
 })
 export class CartComponent implements OnInit {
     cart: any[] = [];
+    authProvider = inject(AuthProviderService);
 
     constructor(
         private cartService: CartService,
@@ -26,6 +28,10 @@ export class CartComponent implements OnInit {
     ngOnInit(): void {
         this.loadCart();
     }
+
+    isAuthenticated = computed(() => {
+        return this.authProvider.isAuthenticated();
+    });
 
     loadCart(): void {
         this.cart = this.cartService.getCart();
