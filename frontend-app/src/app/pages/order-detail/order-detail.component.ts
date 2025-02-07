@@ -44,4 +44,17 @@ export class OrderDetailComponent implements OnInit {
             this.total = value.toFixed(2);
         }
     }
+
+    getStatusBadge(status: string): string {
+        switch (status) {
+            case "PENDING":
+                return "badge bg-warning";
+            case "SHIPPED":
+                return "badge bg-success";
+            case "CANCELLED":
+                return "badge bg-danger";
+            default:
+                return "badge bg-secondary";
+        }
+    }
 }

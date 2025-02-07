@@ -1,19 +1,38 @@
-<div class="container mt-4">
-    <div class="row">
-        <div class="col-md-6">
-            <img [src]="product?.imageUrl" class="img-fluid shadow-sm w-100" style="max-height: 500px;"
-                alt="{{ product?.name }}">
+<!-- Toast Bootstrap -->
+<div class="toast show position-fixed bottom-0 end-0 m-3 bg-success text-white p-2 rounded" *ngIf="showToast"
+    role="alert">
+    <div class="d-flex">
+        <div class="toast-body">
+            {{ product.name }} a été ajouté au panier !
         </div>
-        <div class="col-md-6">
-            <h2>{{ product?.name }}</h2>
-            <p class="text-muted">{{ product?.description }}</p>
-            <p class="fw-bold fs-4">{{ product?.price }} €</p>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto z-3" (click)="showToast = false"></button>
+    </div>
+</div>
 
-            <div class="d-flex align-items-center gap-3">
-                <button class="btn btn-primary" (click)="decreaseQuantity()">-</button>
-                <span class="fs-5 p-1 px-3 border ">{{ quantity }}</span>
-                <button class="btn btn-primary" (click)="increaseQuantity()">+</button>
-                <button class="btn btn-success me-2" (click)="addToCart()">Ajouter au panier</button>
+<div class="container p-5">
+    <div class="card shadow-sm p-4 d-flex flex-lg-row justify-content-start align-items-start gap-5">
+
+        <!-- Image du produit -->
+        <div class=" d-flex justify-content-center justify-content-lg-start"
+            style="height: 250px !important; width: 250px !important;">
+            <img [src]="product?.imageUrl" class="img-fluid shadow-sm"
+                style="height: 250px !important; width: 250px !important;object-fit: cover;" alt="{{ product?.name }}">
+        </div>
+
+        <!-- Informations sur le produit -->
+        <div class=" d-flex flex-column flex-grow-1" style="height: 250px ;">
+            <h2 class="text-primary">{{ product?.name }}</h2>
+            <p class="text-muted fs-5">{{ product?.description }}</p>
+            <p class="fw-bold fs-3 text-success">{{ product?.price }} €</p>
+
+            <div class="d-flex align-items-center gap-3 justify-content-end mt-auto">
+                <button class="btn btn-outline-primary " (click)="decreaseQuantity()">-</button>
+                <span class="fs-5 p-1 px-4 border">{{ quantity }}</span>
+                <button class="btn btn-outline-primary" (click)="increaseQuantity()">+</button>
+
+                <button class="btn btn-success  fw-bold" (click)="addToCart()">
+                    <i class="bi bi-cart-plus"></i> Ajouter au panier
+                </button>
             </div>
 
         </div>

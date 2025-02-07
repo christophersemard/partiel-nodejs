@@ -2,15 +2,19 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { ProductService } from "../../services/product.service";
 import { CartService } from "../../services/cart.service";
+import { CommonModule } from "@angular/common";
 
 @Component({
     selector: "app-product-detail",
     templateUrl: "./product-detail.component.html",
     styleUrls: ["./product-detail.component.css"],
+    imports: [CommonModule],
 })
 export class ProductDetailComponent implements OnInit {
     product: any;
     quantity: number = 1; // Quantité initiale
+
+    showToast = false;
 
     constructor(
         private route: ActivatedRoute,
@@ -39,6 +43,12 @@ export class ProductDetailComponent implements OnInit {
             console.log(
                 `${this.quantity}x ${this.product.name} ajouté(s) au panier.`
             );
+
+            this.showToast = true;
+
+            setTimeout(() => {
+                this.showToast = false;
+            }, 3000);
         }
     }
 

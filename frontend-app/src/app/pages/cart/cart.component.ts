@@ -30,6 +30,12 @@ export class CartComponent implements OnInit {
     loadCart(): void {
         this.cart = this.cartService.getCart();
     }
+    getTotal(): number {
+        return this.cart.reduce(
+            (total, item) => total + item.price * item.quantity,
+            0
+        );
+    }
 
     increaseQuantity(productId: string): void {
         this.cartService.updateQuantity(productId, 1);
