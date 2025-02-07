@@ -28,4 +28,16 @@ export class AdminController {
 
         return this.adminService.getDashboardStats();
     }
+
+    @UseGuards(JwtAuthGuard)
+    @Get("orders-per-month")
+    async getOrdersPerMonth() {
+        return this.adminService.getOrdersPerMonth();
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Get("product-sales")
+    async getProductSales() {
+        return this.adminService.getProductSales();
+    }
 }

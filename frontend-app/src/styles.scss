@@ -64,6 +64,7 @@ $theme-colors: (
 
 *{
     border-radius: 0 !important;
+    box-sizing: border-box !important;
 }
 
   
@@ -242,4 +243,27 @@ h1, h3, h4, h5, h6 {
 .list-group {
     border: none !important;
     transition: all 0.3s ease;
+}
+
+// .ngx-charts-outer {
+//     max-width: 100% !important  ;
+//     flex-wrap: nowrap !important;
+//     display: flex !important;
+//     overflow: auto !important;
+// }
+// .ngx-charts{
+//     display: flex !important;
+//     flex-grow: 1 !important;
+//     flex-wrap: nowrap !important;
+//     width: fit-content !important;
+// }
+
+.dashboard-card-content {
+    width: 100%;
+    height: calc(100% - 30px);
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
 }

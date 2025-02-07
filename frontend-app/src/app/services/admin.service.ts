@@ -15,4 +15,12 @@ export class AdminService {
         console.log(response);
         return response;
     }
+
+    getOrderStats(): Observable<any[]> {
+        return this.http.get<any[]>(`${this.apiUrl}/orders-per-month`);
+    }
+
+    getProductSales(): Observable<any[]> {
+        return this.http.get<any[]>(`${this.apiUrl}/product-sales`);
+    }
 }

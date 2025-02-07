@@ -1,70 +1,97 @@
 <div class="container mt-4">
-    <h2 class=" mb-4">Tableau de Bord Admin</h2>
 
     <div *ngIf="stats; else loading">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card text-bg-primary shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">Total Commandes</h5>
-                        <p class="fs-3">{{ stats.totalOrders }}</p>
+        <div class="row gy-5 gx-5 mt-4">
+            <div class="row col-12  col-md-9 gy-3 gx-3">
+
+                <h2 class="col-12 mb-0 mt-0">Tableau de Bord Admin</h2>
+                <div class="col-md-3">
+                    <div class="card text-bg-primary shadow-sm">
+                        <div class="card-body p-0">
+                            <h5 class="card-title fs-6">Total Commandes</h5>
+                            <p class="fs-4 mb-0">{{ stats.totalOrders }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card text-bg-success shadow-sm">
+                        <div class="card-body p-0">
+                            <h5 class="card-title fs-6">Commandes Expédiées</h5>
+                            <p class="fs-4 mb-0">{{ stats.shippedOrders }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card text-bg-warning shadow-sm">
+                        <div class="card-body p-0">
+                            <h5 class="card-title fs-6">Commandes en Cours</h5>
+                            <p class="fs-4 mb-0">{{ stats.pendingOrders }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 mt-3">
+                    <div class="card text-bg-danger shadow-sm">
+                        <div class="card-body p-0">
+                            <h5 class="card-title fs-6">Commandes Annulées</h5>
+                            <p class="fs-4 mb-0">{{ stats.cancelledOrders }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mt-3">
+                    <div class="card text-bg-secondary shadow-sm">
+                        <div class="card-body p-0">
+                            <h5 class="card-title fs-6">Produits en Stock</h5>
+                            <p class="fs-4 mb-0">{{ stats.totalStock }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mt-3">
+                    <div class=" card text-bg-dark shadow-sm">
+                        <div class="card-body p-0">
+                            <h5 class="card-title fs-6">Produits Supprimés</h5>
+                            <p class="fs-4 mb-0">{{ stats.deletedProducts }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-4">
-                <div class="card text-bg-success shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">Commandes Expédiées</h5>
-                        <p class="fs-3">{{ stats.shippedOrders }}</p>
-                    </div>
+            <div class="col-12 col-md-3 mt-4">
+                <h3 class="mb-3">Top Produits Vendus</h3>
+                <ul class="list-group">
+                    <li *ngFor="let product of stats.topProducts"
+                        class="list-group-item d-flex justify-content-between">
+                        <span>{{ product.name }}</span>
+                        <span class="badge bg-primary pb-0 mt-1">{{ product.sales }} ventes</span>
+                    </li>
+                </ul>
+            </div>
+
+
+            <div class="col-12 col-md-5">
+                <h4 class="">Commandes par Mois</h4>
+                <div class="dashboard-chart-content">
+                    <ngx-charts-bar-vertical [results]="orderStats" [scheme]="colorSchemeOrders" [xAxis]="true"
+                        [yAxis]="true" [legend]="false" [showDataLabel]="true" [showXAxisLabel]="true"
+                        [showYAxisLabel]="true" xAxisLabel="Mois" yAxisLabel="Commandes" style="max-width: 100%;">
+                    </ngx-charts-bar-vertical>
                 </div>
             </div>
 
-            <div class="col-md-4">
-                <div class="card text-bg-warning shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">Commandes en Cours</h5>
-                        <p class="fs-3">{{ stats.pendingOrders }}</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 mt-3">
-                <div class="card text-bg-danger shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">Commandes Annulées</h5>
-                        <p class="fs-3">{{ stats.cancelledOrders }}</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 mt-3">
-                <div class="card text-bg-info shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">Produits en Stock</h5>
-                        <p class="fs-3">{{ stats.totalStock }}</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 mt-3">
-                <div class="card text-bg-dark shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">Produits Supprimés</h5>
-                        <p class="fs-3">{{ stats.deletedProducts }}</p>
-                    </div>
+            <!-- Graphique en camembert : Répartition des ventes par produit -->
+            <div class="col-12 col-md-7 ">
+                <h4 class="">Répartition des Ventes</h4>
+                <div class="dashboard-chart-content">
+                    <ngx-charts-pie-chart [results]="productSales" [scheme]="colorSchemeSales" [legend]="true"
+                        [labels]="true" [doughnut]="true" [explodeSlices]="false" style="max-width: 100%;">
+                    </ngx-charts-pie-chart>
                 </div>
             </div>
         </div>
-
-        <h3 class="mt-4">Top Produits Vendus</h3>
-        <ul class="list-group">
-            <li *ngFor="let product of stats.topProducts" class="list-group-item d-flex justify-content-between">
-                <span>{{ product.name }}</span>
-                <span class="badge bg-primary">{{ product.sales }} ventes</span>
-            </li>
-        </ul>
     </div>
 
     <ng-template #loading>
